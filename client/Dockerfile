@@ -1,6 +1,5 @@
 #Use a base node image
 FROM node:10 as client-build
-WORKDIR /build
 #copy contents into image
 COPY . .
 #execute command to download dependancies

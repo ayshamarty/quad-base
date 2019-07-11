@@ -15,6 +15,7 @@ services:
       - target: 80
         protocol: tcp
         published: 80
+      container_name: nginx
 
 
     server:
@@ -22,6 +23,9 @@ services:
         context: ./server
       expose: 
       - '8080'
+      container_name: server
+      depends_on:
+      - mongo
 
     client:
       build: 
@@ -30,12 +34,13 @@ services:
       - '3000'   
       environment:
       - REACT_APP_SERVICE_HOST=${REACT_APP_SERVICE_HOST}
-      
+      container_name: client
       
     mongo:
       image: mongo
       expose: 
       - '27017'      
+      container_name: mongo
 
     mongo-seed:
       image: fvilers/mongo-seed:1.0.0
